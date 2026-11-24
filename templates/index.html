@@ -2,90 +2,22 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kartu Nama Flask</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Form POST Flask</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body class="tema-{{ tema }}">
-  <div class="bungkus">
+<body>
+  <div class="kotak">
+    <h1>Form POST</h1>
 
-    <section class="panel">
-      <p class="tag">Flask · method POST</p>
-      <h1>Cetak kartu namamu</h1>
-      <p class="sub">Isi datanya, pilih warna, lalu lihat kartumu jadi.</p>
+    <form method="post">
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="nama" placeholder="Tulis namamu" required>
+      <button type="submit">Kirim</button>
+    </form>
 
-      <form method="post" action="{{ url_for('index') }}">
-        <label for="nama">Nama</label>
-        <input type="text" id="nama" name="nama" placeholder="Tulis namamu" value="{{ nama or '' }}" required autofocus>
-
-        <label for="jurusan">Jurusan</label>
-        <input type="text" id="jurusan" name="jurusan" placeholder="Contoh: Teknik Informatika" value="{{ jurusan }}">
-
-        <label for="hobi">Hobi <small>(pisahkan dengan koma)</small></label>
-        <input type="text" id="hobi" name="hobi" placeholder="Contoh: Membaca, Coding, Futsal" value="{{ hobi_teks }}">
-
-        <label>Warna kartu</label>
-        <div class="pilihan">
-          <label class="swatch" title="Ungu">
-            <input type="radio" name="tema" value="ungu" {% if tema == 'ungu' %}checked{% endif %}>
-            <span class="s-ungu"></span>
-          </label>
-          <label class="swatch" title="Peach">
-            <input type="radio" name="tema" value="sunset" {% if tema == 'sunset' %}checked{% endif %}>
-            <span class="s-sunset"></span>
-          </label>
-          <label class="swatch" title="Mint">
-            <input type="radio" name="tema" value="mint" {% if tema == 'mint' %}checked{% endif %}>
-            <span class="s-mint"></span>
-          </label>
-          <label class="swatch" title="Langit">
-            <input type="radio" name="tema" value="langit" {% if tema == 'langit' %}checked{% endif %}>
-            <span class="s-langit"></span>
-          </label>
-        </div>
-
-        <button type="submit">Cetak kartu</button>
-      </form>
-    </section>
-
-    <section class="sisi">
-      {% if nama %}
-      <article class="kartu">
-        <div class="kilau"></div>
-        <header>
-          <span class="judul">KARTU NAMA</span>
-          <span class="nomor">ID-{{ "%04d"|format(nama|length * 137) }}</span>
-        </header>
-
-        <div class="profil">
-          <div class="avatar">{{ nama[0]|upper }}</div>
-          <div>
-            <h2 class="nama">{{ nama }}</h2>
-            <p class="jurusan">{{ jurusan if jurusan else "Mahasiswa" }}</p>
-          </div>
-        </div>
-
-        {% if hobi %}
-        <div class="hobi">
-          {% for h in hobi %}
-          <span class="chip">{{ h }}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
-
-        <footer>
-          <span>{{ nama|length }} huruf</span>
-          <span>dibuat dengan Flask</span>
-        </footer>
-      </article>
-      {% else %}
-      <div class="kosong">
-        <p class="kosong-judul">Kartumu muncul di sini</p>
-        <p>Isi form di samping lalu tekan tombol.</p>
-      </div>
-      {% endif %}
-    </section>
-
+    {% if nama %}
+    <p class="hasil">Halo, {{ nama }}!</p>
+    {% endif %}
   </div>
 </body>
 </html>
