@@ -2,11 +2,13 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    nama = None
-    if request.method == 'POST':
-        nama = request.form['nama']
+    return render_template('index.html')
+
+@app.route('/proses', methods=['POST'])
+def proses():
+    nama = request.form['nama']
     return render_template('index.html', nama=nama)
 
 if __name__ == '__main__':

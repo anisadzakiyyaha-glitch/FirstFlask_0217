@@ -9,7 +9,7 @@
   <div class="kotak">
     <h1>Form POST</h1>
 
-    <form method="post">
+    <form method="post" action="{{ url_for('proses') }}">
       <label for="nama">Nama</label>
       <input type="text" id="nama" name="nama" placeholder="Tulis namamu" required>
       <button type="submit">Kirim</button>
